@@ -34,12 +34,6 @@ jobs:
           -r junitfull \
           --reporter-junitfull-export testResults/result.xml \
           -n 2 \
-        env:
-          SLACK_CHANNEL: U027XFPFPA8
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
-          SLACK_MESSAGE: 'Check out the result https://github.com/pmman/CITest/actions/runs/${{ github.run_id }}'
-          SLACK_TITLE: Contract test failed
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       - name: Output the run Details
         uses: actions/upload-artifact@v2
         if: always()    # run this step even if previous step failed
@@ -56,3 +50,9 @@ jobs:
         id: slack
         if: always() #only send message when test fail
         uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: U027XFPFPA8
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
+          SLACK_MESSAGE: 'Check out the result https://github.com/pmman/CITest/actions/runs/${{ github.run_id }}'
+          SLACK_TITLE: Contract test result
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
