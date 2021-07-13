@@ -30,8 +30,7 @@ jobs:
       - name: Run POSTMAN collection
         run: |
           mkdir -p testResults
-          newman run ./APITests.postman_collection.json \
-          -e ./environment.json \
+          newman run ./CI_Test.postman_collection.json \
           -r junitfull \
           --reporter-junitfull-export testResults/result.xml \
           -n 2 \
